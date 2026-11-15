@@ -1,0 +1,54 @@
+{
+  "name": "@technicalheist/agy-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server that exposes Google's Antigravity CLI (agy) as tools — persistent conversations, live progress, stdio transport.",
+  "type": "module",
+  "main": "src/server.js",
+  "bin": {
+    "agy-mcp-server": "bin/agy-mcp-server.js"
+  },
+  "files": [
+    "src",
+    "bin",
+    "README.md",
+    "LICENSE",
+    ".env.example"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node bin/agy-mcp-server.js",
+    "test": "node test/test-tools.mjs",
+    "test:smoke": "node test/test-smoke.mjs",
+    "test:tools": "node test/test-tools.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "antigravity",
+    "agy",
+    "gemini",
+    "agent",
+    "opencode",
+    "claude-desktop"
+  ],
+  "author": "technicalheist",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/technicalheist/agy-mcp-server.git"
+  },
+  "homepage": "https://github.com/technicalheist/agy-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/technicalheist/agy-mcp-server/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "dotenv": "^17.2.1",
+    "zod": "^3.25.76"
+  }
+}
