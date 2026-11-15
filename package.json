@@ -1,5 +1,5 @@
 {
-  "name": "@technicalheist/agy-mcp-server",
+  "name": "@shivrajansingh/agy-mcp-server",
   "version": "1.0.0",
   "description": "MCP server that exposes Google's Antigravity CLI (agy) as tools — persistent conversations, live progress, stdio transport.",
   "type": "module",
@@ -37,11 +37,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/technicalheist/agy-mcp-server.git"
+    "url": "git+https://github.com/shivrajansingh/agy-mcp-server.git"
   },
-  "homepage": "https://github.com/technicalheist/agy-mcp-server#readme",
+  "homepage": "https://github.com/shivrajansingh/agy-mcp-server#readme",
   "bugs": {
-    "url": "https://github.com/technicalheist/agy-mcp-server/issues"
+    "url": "https://github.com/shivrajansingh/agy-mcp-server/issues"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

@@ -66,18 +66,18 @@ idea for the OpenAI Chat Completions format.
 
 ```bash
 # one-time: tell npm where @technicalheist packages live
-echo "@technicalheist:registry=https://npm.pkg.github.com" >> ~/.npmrc
+echo "@shivrajansingh:registry=https://npm.pkg.github.com" >> ~/.npmrc
 
 # auth (a GitHub token with read:packages)
 echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" >> ~/.npmrc
 
-npm install -g @technicalheist/agy-mcp-server
+npm install -g @shivrajansingh/agy-mcp-server
 ```
 
 ### From source
 
 ```bash
-git clone https://github.com/technicalheist/agy-mcp-server.git
+git clone https://github.com/shivrajansingh/agy-mcp-server.git
 cd agy-mcp-server
 npm install
 ```
