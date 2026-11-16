@@ -62,17 +62,23 @@ idea for the OpenAI Chat Completions format.
 
 ## Install
 
-### From GitHub Packages
+### Directly from GitHub
+
+No registry setup, no `.npmrc` edits — npm installs straight from the repo:
 
 ```bash
-# one-time: tell npm where @technicalheist packages live
-echo "@shivrajansingh:registry=https://npm.pkg.github.com" >> ~/.npmrc
-
-# auth (a GitHub token with read:packages)
-echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" >> ~/.npmrc
-
-npm install -g @shivrajansingh/agy-mcp-server
+npm install -g github:shivrajansingh/agy-mcp-server
 ```
+
+Or run it without installing (handy for MCP hosts that spawn the server):
+
+```bash
+npx -y github:shivrajansingh/agy-mcp-server
+```
+
+A versioned copy is also published on GitHub Packages as
+`@shivrajansingh/agy-mcp-server`, but the command above is all you need
+unless you deliberately want the registry package.
 
 ### From source
 
