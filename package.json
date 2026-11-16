@@ -1,6 +1,6 @@
 {
   "name": "@shivrajansingh/agy-mcp-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server that exposes Google's Antigravity CLI (agy) as tools — persistent conversations, live progress, stdio transport.",
   "type": "module",
   "main": "src/server.js",

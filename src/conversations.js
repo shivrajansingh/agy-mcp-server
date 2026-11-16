@@ -138,6 +138,8 @@ export class ConversationManager {
   constructor() {
     /** @type {Map<string, Conversation>} */
     this.conversations = new Map();
+    /** id -> agy conversation id for stopped/evicted conversations */
+    this._closed = new Map();
     this.defaultId = DEFAULT_CONVERSATION_ID;
     this._reaper = null;
   }
@@ -166,6 +168,15 @@ export class ConversationManager {
     return conv;
   }
 
+  /** Remember a closed conversation so its own id stays resumable. */
+  _rememberClosed(conv) {
+    if (!conv.agyConversationId) return;
+    if (this._closed.size >= 100) {
+      this._closed.delete(this._closed.keys().next().value);
+    }
+    this._closed.set(conv.id, conv.agyConversationId);
+  }
+
   /** Close the least-recently-used idle conversation (kept resumable). */
   _evictOne() {
     let oldest = null;
@@ -174,6 +185,7 @@ export class ConversationManager {
       if (!oldest || c.lastUsed < oldest.lastUsed) oldest = c;
     }
     if (oldest) {
+      this._rememberClosed(oldest);
       void oldest.hibernate();
       this.conversations.delete(oldest.id);
       return true;
@@ -215,9 +227,14 @@ export class ConversationManager {
     let conv = this._get(id);
 
     if (!conv) {
-      // The id may be an agy conversation id (UUID) to resume from disk.
       conv = this._create(id);
-      if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) {
+      // Resume memory: a previously closed conversation's agy id, or an agy
+      // conversation UUID passed directly.
+      const remembered = this._closed.get(id);
+      if (remembered) {
+        conv.agyConversationId = remembered;
+        this._closed.delete(id);
+      } else if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) {
         conv.agyConversationId = id;
       }
     }
@@ -241,6 +258,7 @@ export class ConversationManager {
   async stop(id) {
     const conv = this._get(id || this.defaultId);
     if (!conv) return false;
+    this._rememberClosed(conv);
     await conv.hibernate();
     this.conversations.delete(conv.id);
     if (this.defaultId === conv.id) this.defaultId = DEFAULT_CONVERSATION_ID;
